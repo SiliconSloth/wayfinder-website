@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wayfinder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Open+Sans:wght@600&family=Prompt:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1b1b1b;
+            --muted: #414141;
+            --accent: #3f6ef5;
+            --accent-dark: #254fc5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: 'Prompt', 'Open Sans', sans-serif;
+            color: var(--ink);
+        }
+
+        .landing-page {
+            width: 100%;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.16fr 0.84fr;
+            overflow: hidden;
+        }
+
+        .image-panel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 12px 18px 18px;
+            min-height: 100vh;
+        }
+
+        .image-panel #screenshot {
+            width: min(94%, 820px);
+            height: auto;
+            max-height: calc(100vh - 36px);
+            object-fit: contain;
+            border: 1px solid rgba(107, 114, 128, 0.164);
+            border-radius: 9px;
+            box-shadow: 0 18px 40px rgba(31, 41, 55, 0.20);
+            cursor: zoom-in;
+            transition: transform 180ms ease;
+        }
+
+        .image-panel #screenshot:not(.medium-zoom-image--hidden):hover {
+            transform: scale(1.015);
+        }
+
+        .image-panel #screenshot.medium-zoom-image--opened {
+            max-height: none;
+        }
+
+        .content-panel {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 72px 56px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .content-wrap {
+            max-width: 430px;
+            width: 100%;
+        }
+
+        .brand-block {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            z-index: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 6px rgba(17, 24, 39, 0.12));
+        }
+
+        .brand-wordmark {
+            font-family: 'Fredoka', 'Prompt', sans-serif;
+            font-size: clamp(2rem, 2vw, 2.8rem);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: 'Fredoka', 'Prompt', sans-serif;
+            font-size: clamp(2.7rem, 4vw, 5rem);
+            line-height: 0.96;
+            letter-spacing: -0.05em;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        h1 .highlight,
+        h2 .highlight {
+            color: var(--highlight-color);
+        }
+
+        .highlight-cyan {
+            --highlight-color: #4cc9f0;
+        }
+
+        .highlight-pink {
+            --highlight-color: #ff5ea8;
+        }
+
+        .highlight-yellow {
+            --highlight-color: #ffd44d;
+        }
+
+        .subtext {
+            margin: 24px 0 0;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .cta-row {
+            margin-top: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px 14px 22px;
+            background: var(--accent);
+            color: #fff;
+            font-family: 'Open Sans', 'Prompt', sans-serif;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: transform 0.2s ease, background 0.2s ease;
+            clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
+        }
+
+        .cta:hover {
+            background: var(--accent-dark);
+            transform: translate(4px, 0);
+        }
+
+        .safety-section {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+            gap: clamp(40px, 8vw, 140px);
+            align-items: start;
+            padding: clamp(80px, 12vw, 170px) clamp(24px, 8vw, 140px);
+        }
+
+        .regulators-section {
+            background: #ffffff;
+        }
+
+        .safety-section h2 {
+            margin: 0;
+            font-family: 'Fredoka', 'Prompt', sans-serif;
+            font-size: clamp(2.7rem, 4vw, 5rem);
+            line-height: 0.96;
+            letter-spacing: -0.05em;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        #safety-title {
+            max-width: 8.75em;
+        }
+
+        #regulators-title {
+            max-width: 9.9em;
+        }
+
+        .safety-copy,
+        .regulators-copy {
+            max-width: 450px;
+            margin: 10px 0 0;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .regulators-section .cta-row {
+            margin-top: 28px;
+        }
+
+        @media (max-width: 900px) and (orientation: portrait) {
+            .landing-page {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .image-panel {
+                min-height: auto;
+                padding: 90px 18px 32px;
+            }
+
+            .image-panel #screenshot {
+                width: 100%;
+            }
+
+            .content-panel {
+                padding: 40px 26px 48px;
+            }
+
+            .safety-section {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .safety-copy,
+            .regulators-copy {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="landing-page">
+        <div class="image-panel">
+            <div class="brand-block" aria-label="Wayfinder brand">
+                <img class="brand-logo" src="assets/icons/icon.svg" alt="Wayfinder logo">
+                <div class="brand-wordmark">Wayfinder</div>
+            </div>
+            <img src="assets/images/screenshot.png" id="screenshot" alt="Wayfinder app preview">
+        </div>
+
+        <div class="content-panel">
+            <div class="content-wrap">
+                <h1>The algorithm should be <span class="highlight highlight-cyan">yours</span></h1>
+                <p class="subtext">
+                    Wayfinder is an independent on-device recommender algorithm for YouTube.
+                    It gives the user, not YouTube, total control over how the algorithm functions, and lets you see how recommendations are being made. 
+                </p>
+                <div class="cta-row">
+                    <a class="cta" href="publications/report.pdf">READ OUR REPORT</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="safety-section" aria-labelledby="safety-title">
+        <h2 id="safety-title">Designed for <span class="highlight highlight-pink">safety</span>, not addiction</h2>
+        <p class="safety-copy">
+            Separating the algorithm from the underlying platform
+            completely changes the incentives around recommender algorithm design.
+            It encourages developers to build tools users actually want to use
+            instead of trying to keep them watching content for as long as possible.
+        </p>
+    </section>
+
+    <section class="safety-section regulators-section" aria-labelledby="regulators-title">
+        <h2 id="regulators-title">We're asking <span class="highlight highlight-yellow">regulators</span> to make this possible.</h2>
+        <div>
+            <p class="regulators-copy">
+                Wayfinder is just a tech demo for now.
+                We're calling on governments to mandate the software interfaces
+                needed to open up genuine competition in the recommender algorithm space.
+            </p>
+            <div class="cta-row">
+                <a class="cta" href="publications/report.pdf">READ OUR REPORT</a>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+
+        mediumZoom('#screenshot', {
+            background: 'rgba(15, 23, 42, 0.82)',
+            margin: 24,
+            scrollOffset: 0
+        });
+    </script>
+</body>
+</html>

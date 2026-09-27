@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page not found | Wayfinder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Open+Sans:wght@600&family=Prompt:wght@500&display=swap" rel="stylesheet">
+    <script>window.location.replace("/");</script>
+    <style>
+        :root {
+            --ink: #1b1b1b;
+            --muted: #414141;
+            --accent: #3f6ef5;
+            --accent-dark: #254fc5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 96px 24px;
+            font-family: 'Prompt', 'Open Sans', sans-serif;
+            color: var(--ink);
+            background: #ffffff;
+        }
+
+        .brand-block {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 6px rgba(17, 24, 39, 0.12));
+        }
+
+        .brand-wordmark {
+            font-family: 'Fredoka', 'Prompt', sans-serif;
+            font-size: clamp(2rem, 2vw, 2.8rem);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .not-found {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .code {
+            margin: 0;
+            font-family: 'Prompt', sans-serif;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        h1 {
+            margin: 12px 0 0;
+            font-family: 'Fredoka', 'Prompt', sans-serif;
+            font-size: clamp(2.7rem, 6vw, 5rem);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .cta-row {
+            margin-top: 36px;
+            display: flex;
+            justify-content: center;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px 14px 22px;
+            background: var(--accent);
+            color: #fff;
+            font-family: 'Open Sans', 'Prompt', sans-serif;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: transform 0.2s ease, background 0.2s ease;
+            clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
+        }
+
+        .cta:hover {
+            background: var(--accent-dark);
+            transform: translate(4px, 0);
+        }
+    </style>
+</head>
+<body>
+    <a class="brand-block" href="/" aria-label="Wayfinder home">
+        <img class="brand-logo" src="/assets/icons/icon.svg" alt="">
+        <span class="brand-wordmark">Wayfinder</span>
+    </a>
+
+    <main class="not-found">
+        <p class="code" aria-hidden="true">404</p>
+        <h1>Page not found</h1>
+        <div class="cta-row">
+            <a class="cta" href="/">GO HOME</a>
+        </div>
+    </main>
+</body>
+</html>
